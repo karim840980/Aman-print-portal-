@@ -8,16 +8,15 @@
   "description": "Professional Photography Portfolio Platform by Aman Digital",
   "icons": [
     {
-      "src": "aman.png",
+      "src": "aman.png?v=2",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     },
     {
-      "src": "aman.png",
+      "src": "aman.png?v=2",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     }
   ]
+  
 }
