@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a0e27">
+    <meta name="description" content="AMAN HUB - Professional Photography Portfolio Platform">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="AMAN HUB">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="aman.png">
+    <link rel="apple-touch-icon" href="aman.png"> 
+    <title>AMAN HUB - Photography Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0a0e27;
+            --accent: #ff6b35;
+            --accent-light: #ff8a60;
+            --neon: #00d9ff;
+            --text-light: #f8f9fa;
+            --text-muted: #a0a0a0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--primary);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        body.light-mode {
+            --primary: #ffffff;
+            --text-light: #1a1a1a;
+            --neon: #0099cc;
+            background: #f5f5f5 !important;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 14, 39, 0.85);
+            backdrop-filter: blur(20px);
+            padding: 1.3rem 2rem;
+            overflow-y: hidden;
+            overflow-x: auto;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 3.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ff6b35, #00d9ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            white-space: nowrap;
+            font-family: 'Syne', sans-serif;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            flex: 1;
+            max-width: 350px;
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            padding: 0.5rem 0.9rem;
+            border-radius: 10px;
+            color: var(--accent);
+        }
+
+        .search-bar input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--text-light);
+            flex: 1;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .search-bar input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1.2rem;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .icon-btn {
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            color: var(--accent);
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-btn:hover {
+            background: rgba(255, 107, 53, 0.2);
+            border-color: var(--neon);
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .upload-btn, .logout-btn {
+            width: 48px;
+            height: 48px;
+            background: var(--accent);
+            border: none;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .upload-btn:hover, .logout-btn:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        .hero {
+            margin-top: 88px;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ff6b35, #a78bfa, #00d9ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'Syne', sans-serif;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .cta-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .cta-primary:hover {
+            background: var(--accent-light);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        .cta-secondary:hover {
+            background: rgba(255, 107, 53, 0.1);
+            border-color: var(--neon);
+            color: var(--neon);
+        }
+
+        .section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            font-family: 'Syne', sans-serif;
+            background: linear-gradient(135deg, #ff6b35, #00d9ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .filter-btn {
+            padding: 0.7rem 1.5rem;
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            color: var(--accent);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .filter-btn.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .filter-btn:hover {
+            border-color: var(--neon);
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
+        }
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            aspect-ratio: 1;
+            background: rgba(255, 107, 53, 0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay button {
+            background: var(--accent);
+            border: none;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-overlay button:hover {
+            background: var(--accent-light);
+        }
+
+        .about-section {
+            background: rgba(255, 107, 53, 0.05);
+            border-radius: 20px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .about-card {
+            background: rgba(255, 107, 53, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .about-card:hover {
+            border-color: var(--neon);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .about-card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Syne', sans-serif;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 107, 53, 0.1);
+            border-radius: 15px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            font-family: 'Syne', sans-serif;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(255, 107, 53, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-family: 'Syne', sans-serif;
+        }
+
+        .footer-section a {
+            display: block;
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--neon);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            color: var(--text-muted);
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 107, 53, 0.2);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--primary);
+            padding: 2rem;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header h2 {
+            color: var(--accent);
+            font-family: 'Syne', sans-serif;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: var(--accent);
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            color: var(--text-light);
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--neon);
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
+        }
+
+        .confirm-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--accent);
+            border: none;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .confirm-btn:hover {
+            background: var(--accent-light);
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .lightbox-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 107, 53, 0.7);
+            border: none;
+            color: white;
+            padding: 1rem;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-nav:hover {
+            background: var(--accent);
+        }
+
+        .lightbox-prev {
+            left: 20px;
+        }
+
+        .lightbox-next {
+            right: 20px;
+        }
+
+        @media (max-width: 1024px) {
+            .logo {
+                font-size: 2.3rem;
+            }
+
+            .search-bar {
+                max-width: 250px;
+            }
+
+            .header-actions {
+                gap: 0.9rem;
+            }
+
+            .icon-btn, .upload-btn, .logout-btn {
+                width: 42px;
+                height: 42px;
+                font-size: 0.95rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 1.2rem 1.2rem;
+            }
+
+            .header-content {
+                gap: 1.2rem;
+            }
+
+            .logo {
+                font-size: 1.8rem;
+            }
+
+            .search-bar {
+                display: none;
+            }
+
+            .icon-btn, .upload-btn, .logout-btn {
+                width: 38px;
+                height: 38px;
+                font-size: 0.85rem;
+            }
+
+            .hero {
+                margin-top: 70px;
+                padding: 2rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .cta-btn {
+                width: 100%;
+            }
+
+            .section {
+                padding: 2rem 1rem;
+            }
+
+            .gallery-container {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 1rem;
+            }
+
+            .filter-buttons {
+                gap: 0.5rem;
+            }
+
+            .filter-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.4rem;
+            }
+
+            .header-actions {
+                gap: 0.5rem;
+            }
+
+            .icon-btn, .upload-btn, .logout-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 0.75rem;
+            }
+
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero p {
+                font-size: 0.95rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .gallery-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                padding: 1.5rem;
+            }
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">📸 AMAN HUB</div>
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search photos..." onkeyup="searchPhotos()">
+            </div>
+            <div class="header-actions">
+                <button class="icon-btn" onclick="toggleDarkMode()" title="Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="icon-btn" onclick="scrollToGallery()" title="Settings">
+                    <i class="fas fa-cog"></i>
+                </button>
+                <button class="icon-btn" id="installBtn" onclick="installApp()" title="Install App" style="display: none;">
+                    <i class="fas fa-download"></i>
+                </button>
+                <button class="upload-btn" onclick="document.getElementById('fileInput').click()" title="Upload">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                </button>
+                <button class="logout-btn" onclick="handleLogout()" title="Logout">
+                    <i class="fas fa-door-open"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <input type="file" id="fileInput" accept="image/*" onchange="handlePhotoUpload(event)">
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Your Photography, Amplified</h1>
+            <p>Professional portfolio management for photographers who demand excellence</p>
+            <div class="cta-buttons">
+                <button class="cta-btn cta-primary" onclick="document.getElementById('fileInput').click()">
+                    <i class="fas fa-arrow-up"></i> Start Sharing
+                </button>
+                <button class="cta-btn cta-secondary" onclick="scrollToGallery()">
+                    Explore Gallery
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Featured Works</h2>
+            <p class="section-subtitle">Discover exceptional photography from creative visionaries</p>
+        </div>
+
+        <div class="filter-buttons">
+            <button class="filter-btn active" onclick="filterGallery('all')">All</button>
+            <button class="filter-btn" onclick="filterGallery('landscape')">Landscapes</button>
+            <button class="filter-btn" onclick="filterGallery('nature')">Nature</button>
+            <button class="filter-btn" onclick="filterGallery('urban')">Urban</button>
+        </div>
+
+        <div class="gallery-container" id="gallery"></div>
+    </section>
+
+    <section class="section about-section">
+        <div class="section-header">
+            <h2 class="section-title">About AMAN HUB</h2>
+            <p class="section-subtitle">Empowering photographers worldwide</p>
+        </div>
+
+        <div class="about-grid">
+            <div class="about-card">
+                <div class="about-card-icon">🎨</div>
+                <h3>Creative Freedom</h3>
+                <p>Express your unique vision without limitations. Our platform supports all photography styles.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-card-icon">🌍</div>
+                <h3>Global Community</h3>
+                <p>Connect with photographers from around the world and build meaningful collaborations.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-card-icon">📱</div>
+                <h3>Access Anywhere</h3>
+                <p>View your portfolio on any device. Works offline with full functionality.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-card-icon">🔒</div>
+                <h3>Secure & Private</h3>
+                <p>Your work is completely safe. All data is stored locally on your device.</p>
+            </div>
+        </div>
+
+        <div class="stats-grid" style="margin-top: 3rem;">
+            <div class="stat-card">
+                <div class="stat-number" id="totalPhotos">0</div>
+                <div class="stat-label">Photos Uploaded</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalLikes">0</div>
+                <div class="stat-label">Total Likes</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">∞</div>
+                <div class="stat-label">Storage</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Access</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>AMAN HUB</h4>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">Professional photography portfolio platform.</p>
+                <div style="display: flex; gap: 1rem;">
+                    <a href="#" style="color: var(--accent); cursor: pointer;">📱</a>
+                    <a href="#" style="color: var(--accent); cursor: pointer;">💻</a>
+                    <a href="#" style="color: var(--accent); cursor: pointer;">📸</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Features</h4>
+                <a href="#">Upload Photos</a>
+                <a href="#">Manage Gallery</a>
+                <a href="#">Like System</a>
+                <a href="#">Offline Access</a>
+            </div>
+            <div class="footer-section">
+                <h4>Support</h4>
+                <a href="#">Documentation</a>
+                <a href="#">FAQ</a>
+                <a href="#">Contact</a>
+                <a href="#">Feedback</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">License</a>
+                <a href="#">Credits</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 AMAN HUB. All rights reserved. Made with 💖 for photographers.</p>
+        </div>
+    </footer>
+
+    <div id="lightbox" class="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+            <img id="lightboxImg" class="lightbox-img" src="" alt="">
+            <button class="lightbox-nav lightbox-prev" onclick="previousPhoto()">❮</button>
+            <button class="lightbox-nav lightbox-next" onclick="nextPhoto()">❯</button>
+        </div>
+    </div>
+
+    <script>
+        const DB_NAME = 'AMANHUBDB';
+        const STORE_NAME = 'photos';
+        let db;
+        let allPhotos = [];
+        let currentFilter = 'all';
+        let currentLightboxIndex = 0;
+        let deferredPrompt;
+
+        const defaultPhotos = [
+            { id: 1, title: 'Alpine Peak', url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&h=500&fit=crop', category: 'landscape' },
+            { id: 2, title: 'Golden Sunset', url: 'https://images.unsplash.com/photo-1495904049009-d6daf3d4fdf9?w=500&h=500&fit=crop', category: 'landscape' },
+            { id: 3, title: 'Forest Trail', url: 'https://images.unsplash.com/photo-1511497584788-876760111969?w=500&h=500&fit=crop', category: 'nature' },
+            { id: 4, title: 'City Lights', url: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=500&h=500&fit=crop', category: 'urban' },
+            { id: 5, title: 'Mountain View', url: 'https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=500&h=500&fit=crop', category: 'landscape' }
+        ];
+
+        function initDB() {
+            return new Promise((resolve) => {
+                const request = indexedDB.open(DB_NAME, 1);
+                request.onupgradeneeded = (e) => {
+                    db = e.target.result;
+                    if (!db.objectStoreNames.contains(STORE_NAME)) {
+                        db.createObjectStore(STORE_NAME, { keyPath: 'id', autoIncrement: true });
+                    }
+                };
+                request.onsuccess = () => {
+                    db = request.result;
+                    loadPhotos();
+                    resolve();
+                };
+            });
+        }
+
+        function loadPhotos() {
+            const transaction = db.transaction([STORE_NAME], 'readonly');
+            const store = transaction.objectStore(STORE_NAME);
+            const request = store.getAll();
+            
+            request.onsuccess = () => {
+                allPhotos = [...defaultPhotos, ...request.result];
+                renderGallery();
+                updateStats();
+            };
+        }
+
+        function handlePhotoUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const photo = {
+                    title: file.name.split('.')[0],
+                    url: e.target.result,
+                    category: 'landscape',
+                    likes: 0
+                };
+
+                const transaction = db.transaction([STORE_NAME], 'readwrite');
+                const store = transaction.objectStore(STORE_NAME);
+                store.add(photo);
+
+                transaction.oncomplete = () => {
+                    loadPhotos();
+                    alert('✅ Photo uploaded successfully!');
+                };
+            };
+            reader.readAsDataURL(file);
+            event.target.value = '';
+        }
+
+        function renderGallery() {
+            const gallery = document.getElementById('gallery');
+            gallery.innerHTML = '';
+
+            const filtered = currentFilter === 'all' ? allPhotos : allPhotos.filter(p => p.category === currentFilter);
+
+            filtered.forEach((photo, index) => {
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                item.innerHTML = `
+                    <img src="${photo.url}" alt="${photo.title}" onload="this.style.opacity=1" style="opacity:0;transition:opacity 0.3s">
+                    <div class="gallery-overlay">
+                        <button onclick="openLightbox(${allPhotos.indexOf(photo)})">View</button>
+                    </div>
+                `;
+                gallery.appendChild(item);
+            });
+        }
+
+        function filterGallery(category) {
+            currentFilter = category;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            renderGallery();
+        }
+
+        function searchPhotos() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            currentFilter = 'all';
+            const gallery = document.getElementById('gallery');
+            gallery.innerHTML = '';
+
+            const filtered = allPhotos.filter(p => p.title.toLowerCase().includes(query));
+
+            filtered.forEach((photo) => {
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                item.innerHTML = `
+                    <img src="${photo.url}" alt="${photo.title}">
+                    <div class="gallery-overlay">
+                        <button onclick="openLightbox(${allPhotos.indexOf(photo)})">View</button>
+                    </div>
+                `;
+                gallery.appendChild(item);
+            });
+        }
+
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            document.getElementById('lightboxImg').src = allPhotos[index].url;
+            document.getElementById('lightbox').classList.add('active');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        function nextPhoto() {
+            currentLightboxIndex = (currentLightboxIndex + 1) % allPhotos.length;
+            document.getElementById('lightboxImg').src = allPhotos[currentLightboxIndex].url;
+        }
+
+        function previousPhoto() {
+            currentLightboxIndex = (currentLightboxIndex - 1 + allPhotos.length) % allPhotos.length;
+            document.getElementById('lightboxImg').src = allPhotos[currentLightboxIndex].url;
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('light-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+        }
+
+        function scrollToGallery() {
+            document.querySelector('.gallery-container').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function handleLogout() {
+            if (confirm('Logout?')) {
+                localStorage.clear();
+                location.reload();
+            }
+        }
+
+        function updateStats() {
+            document.getElementById('totalPhotos').textContent = allPhotos.length;
+            document.getElementById('totalLikes').textContent = allPhotos.reduce((sum, p) => sum + (p.likes || 0), 0);
+        }
+
+        // PWA Installation
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('installBtn').style.display = 'flex';
+        });
+
+        function installApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('✅ App installed!');
+                        document.getElementById('installBtn').style.display = 'none';
+                    }
+                    deferredPrompt = null;
+                });
+            }
+        }
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').then(
+                    (reg) => console.log('✅ Service Worker registered'),
+                    (err) => console.log('⚠️ Service Worker error:', err)
+                );
+            });
+        }
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', (e) => {
+            if (!document.getElementById('lightbox').classList.contains('active')) return;
+            if (e.key === 'ArrowRight') nextPhoto();
+            if (e.key === 'ArrowLeft') previousPhoto();
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        // Load preferences
+        window.addEventListener('load', () => {
+            const darkMode = localStorage.getItem('darkMode');
+            if (darkMode === 'light') document.body.classList.add('light-mode');
+            initDB();
+        });
+    </script>
+</body>
+</html>
